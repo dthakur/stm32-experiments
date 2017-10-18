@@ -2,14 +2,14 @@
 
 - All projects created with `STM32CubeMX`
 - All projects compiled with `gcc`
-- All projects tested on `nucleo-f767zi`
+- All projects tested on [nucleo-f767zi](http://www.st.com/en/evaluation-tools/nucleo-f767zi.html)
 - All binaries loaded using [stlink](https://github.com/texane/stlink)
 
 ### catalog
 
 | Project  | Description |
 | ------------- | ------------- |
-| blinky  | Blinks the two on the board with a 100ms delay  |
+| blinky  | Blinks the two on-board LEDs with a 100ms delay  |
 | speedy  | Toggles `PC8` configured with `GPIO_SPEED_FREQ_LOW` and `PC9` configured with `GPIO_SPEED_FREQ_VERY_HIGH`  |
 
 #### blinky
