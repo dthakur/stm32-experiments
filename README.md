@@ -1,6 +1,6 @@
 ### stm32 experiments
 
-- All projects created with `Stm32CubeMX`
+- All projects created with `STM32CubeMX`
 - All projects compiled with `gcc`
 - All projects tested on `nucleo-f767zi`
 - All binaries loaded using [stlink](https://github.com/texane/stlink)
