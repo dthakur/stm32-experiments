@@ -28,3 +28,4 @@ Nothing obvious from far away. Yellow is `GPIO_SPEED_FREQ_LOW` and blue is `GPIO
 
 ![image](https://user-images.githubusercontent.com/118714/31745199-90d0e08c-b416-11e7-8c05-57ac249e44a6.png)
 
+TODO: change `AHB` frequency?
