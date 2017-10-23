@@ -36,14 +36,13 @@
 #include "stm32f7xx_it.h"
 
 /* USER CODE BEGIN 0 */
-extern uint8_t nmi_raised;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim1;
 
 /******************************************************************************/
-/*            Cortex-M7 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M7 Processor Interruption and Exception Handlers         */
 /******************************************************************************/
 
 /**
@@ -52,7 +51,6 @@ extern TIM_HandleTypeDef htim1;
 void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
-  nmi_raised = 1;
   /* USER CODE END NonMaskableInt_IRQn 0 */
   HAL_RCC_NMI_IRQHandler();
   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
@@ -97,6 +95,5 @@ void TIM1_UP_TIM10_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
