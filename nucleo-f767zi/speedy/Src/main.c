@@ -97,7 +97,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_TogglePin(GPIOB, TEST_OUT_SLOW_Pin|TEST_OUT_FAST_Pin);
+    HAL_GPIO_TogglePin(GPIOC, TEST_OUT_SLOW_Pin|TEST_OUT_FAST_Pin);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
