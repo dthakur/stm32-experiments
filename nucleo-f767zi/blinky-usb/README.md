@@ -1,0 +1,2 @@
+  - USB CDC device was generated using `CubeMX`
+  - `CDC_Receive_FS` and `CDC_Transmit_FS` handle data transfer
