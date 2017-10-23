@@ -11,7 +11,7 @@
 | ------------- | ------------- |
 | blinky         | Blinks the two on-board LEDs at 10Hz  |
 | blinky-timers  | Blinks the two on-board LEDs at 10Hz using timers and interrupts |
-| blinky-rots  | Blinks the two on-board LEDs at 10Hz using a `FreeRTOS` thread |
+| blinky-rtos  | Blinks the two on-board LEDs at 10Hz using a `FreeRTOS` thread |
 | speedy         | Toggles `PC8` and `PC9` at different speeds  |
 
 #### blinky
