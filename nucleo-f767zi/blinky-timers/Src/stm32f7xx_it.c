@@ -36,14 +36,27 @@
 #include "stm32f7xx_it.h"
 
 /* USER CODE BEGIN 0 */
-
+extern uint8_t nmi_raised;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
 
 /******************************************************************************/
-/*            Cortex-M7 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M7 Processor Interruption and Exception Handlers         */
 /******************************************************************************/
+
+/**
+* @brief This function handles Non maskable interrupt.
+*/
+void NMI_Handler(void)
+{
+  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+  nmi_raised = 1;
+  /* USER CODE END NonMaskableInt_IRQn 0 */
+  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+
+  /* USER CODE END NonMaskableInt_IRQn 1 */
+}
 
 /**
 * @brief This function handles System tick timer.

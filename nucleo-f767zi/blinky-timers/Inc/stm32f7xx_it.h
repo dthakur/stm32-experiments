@@ -47,6 +47,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
+void NMI_Handler(void);
 void SysTick_Handler(void);
 
 #ifdef __cplusplus
