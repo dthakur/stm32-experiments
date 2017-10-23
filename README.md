@@ -9,7 +9,8 @@
 
 | Project  | Description |
 | ------------- | ------------- |
-| blinky  | Blinks the two on-board LEDs with a 100ms delay  |
+| blinky  | Blinks the two on-board LEDs at 10Hz  |
+| blinky-timers  | Blinks the two on-board LEDs at 10Hz using timers and interrupts |
 | speedy  | Toggles `PC8` configured with `GPIO_SPEED_FREQ_LOW` and `PC9` configured with `GPIO_SPEED_FREQ_VERY_HIGH`  |
 
 #### blinky
