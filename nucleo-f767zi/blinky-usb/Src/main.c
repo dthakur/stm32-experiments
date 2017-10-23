@@ -58,6 +58,8 @@
 
 /* USER CODE BEGIN PV */
 uint8_t stopBlinking = 0;
+const char *off = "blinking off\r\n";
+const char *on = "blinking on\r\n";
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -74,6 +76,8 @@ static void MX_GPIO_Init(void);
 /* USER CODE BEGIN 0 */
 void process_usb_data(uint8_t* buf, uint32_t *len) {
   stopBlinking = !stopBlinking;
+  const char *chosen = stopBlinking ? off: on;
+  CDC_Transmit_FS(chosen, strlen(chosen));
 }
 /* USER CODE END 0 */
 
