@@ -9,10 +9,10 @@
 
 | Project  | Description |
 | ------------- | ------------- |
-| blinky         | Blinks the two on-board LEDs at 10Hz  |
-| blinky-timers  | Blinks the two on-board LEDs at 10Hz using timers and interrupts |
-| blinky-rtos  | Blinks the two on-board LEDs at 10Hz using a `FreeRTOS` thread |
-| speedy         | Toggles `PC8` and `PC9` at different speeds  |
+| [blinky](nucleo-f767zi/blinky)         | Blinks the two on-board LEDs at 10Hz  |
+| [blinky-timers](nucleo-f767zi/blinky-timers)  | Blinks the two on-board LEDs at 10Hz using timers and interrupts |
+| [blinky-rtos](nucleo-f767zi/blinky-rtos)  | Blinks the two on-board LEDs at 10Hz using a `FreeRTOS` thread |
+| [speedy](nucleo-f767zi/speedy)         | Toggles `PC8` and `PC9` at different speeds  |
 
 #### blinky
 
