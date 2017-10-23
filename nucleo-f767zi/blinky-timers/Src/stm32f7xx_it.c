@@ -42,7 +42,7 @@ extern uint8_t nmi_raised;
 /* External variables --------------------------------------------------------*/
 
 /******************************************************************************/
-/*            Cortex-M7 Processor Interruption and Exception Handlers         */
+/*            Cortex-M7 Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
 
 /**
