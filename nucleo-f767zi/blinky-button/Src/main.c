@@ -61,7 +61,7 @@ static void MX_GPIO_Init(void);
 void button_button_irq() {
   GPIO_PinState value = HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin);
 
-  HAL_GPIO_WritePin(USER_Btn_Output_GPIO_Port, USER_Btn_Output_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(USER_Btn_Output_GPIO_Port, USER_Btn_Output_Pin, value);
   HAL_GPIO_WritePin(GPIOB, LD2_Pin, value);
 
   if (value == GPIO_PIN_SET) {
