@@ -42,7 +42,7 @@ void button_button_irq();
 /* External variables --------------------------------------------------------*/
 
 /******************************************************************************/
-/*            Cortex-M7 Processor Interruption and Exception Handlers         */
+/*            Cortex-M7 Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
 
 /**
