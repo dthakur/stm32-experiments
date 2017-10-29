@@ -46,6 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint8_t stopBlinking = 0;
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -97,6 +98,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    if (!stopBlinking) {
+      HAL_GPIO_WritePin(GPIOB, LD2_Pin, HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin))
+      HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
+      HAL_Delay(100);
+    }
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -201,8 +207,8 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : USER_Btn_Pin */
   GPIO_InitStruct.Pin = USER_Btn_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(USER_Btn_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : RMII_MDC_Pin RMII_RXD0_Pin RMII_RXD1_Pin */
@@ -279,6 +285,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
@@ -294,7 +304,7 @@ void _Error_Handler(char * file, int line)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  while(1) 
+  while(1)
   {
   }
   /* USER CODE END Error_Handler_Debug */ 
