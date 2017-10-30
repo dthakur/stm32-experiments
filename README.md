@@ -13,22 +13,5 @@
 | [blinky-timers](nucleo-f767zi/blinky-timers)  | Blinks the two on-board LEDs at 10Hz using timers and interrupts |
 | [blinky-rtos](nucleo-f767zi/blinky-rtos)  | Blinks the two on-board LEDs at 10Hz using a `FreeRTOS` thread |
 | [blinky-usb](nucleo-f767zi/blinky-usb)  | Toggles blinking on and off based on usb virtual com port input |
+| [blinky-button](nucleo-f767zi/blinky-button)  | Toggles blinking on and off based on button press (not debounced) |
 | [speedy](nucleo-f767zi/speedy)         | Toggles `PC8` and `PC9` at different speeds  |
-
-#### blinky
-
-It blinks, yes.
-
-![img_4507 mov](https://user-images.githubusercontent.com/118714/31745294-ff07a19e-b416-11e7-883e-374cf1d737e8.gif)
-
-#### speedy
-
-Nothing obvious from far away. Yellow is `GPIO_SPEED_FREQ_LOW` and blue is `GPIO_SPEED_FREQ_VERY_HIGH`.
-
-![image](https://user-images.githubusercontent.com/118714/31745231-be587812-b416-11e7-9500-c52c08ddece3.png)
-
-30ns difference?
-
-![image](https://user-images.githubusercontent.com/118714/31745199-90d0e08c-b416-11e7-8c05-57ac249e44a6.png)
-
-TODO: change `APB` frequency?
