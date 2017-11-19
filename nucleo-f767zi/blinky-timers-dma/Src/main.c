@@ -51,6 +51,9 @@ DMA_HandleTypeDef hdma_tim1_up;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 
+// circular buffer to load using dma
+uint8_t toggle_data[] = {0xff, 0x0};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -65,7 +68,6 @@ static void MX_TIM1_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
 /* USER CODE END 0 */
 
 int main(void)
@@ -98,11 +100,10 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 
-  // circular buffer to load using dma
-  uint8_t data[] = {0xff, 0x0};
+  // HAL_TIM_Base_Start_IT(&htim1);
 
   // manual dma configuration as we need to send data to gipo
-  HAL_DMA_Start(&hdma_tim1_up, (uint32_t)data, (uint32_t)&GPIOB->ODR, 2);
+  HAL_DMA_Start(&hdma_tim1_up, (uint32_t)toggle_data, (uint32_t)&GPIOB->ODR, 2);
   __HAL_TIM_ENABLE_DMA(&htim1, TIM_DMA_UPDATE);
 
   /* USER CODE END 2 */
@@ -180,7 +181,7 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 9999;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 49;
+  htim1.Init.Period = 99;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
