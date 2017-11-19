@@ -15,3 +15,4 @@
 | [blinky-usb](nucleo-f767zi/blinky-usb)  | Toggles blinking on and off based on usb virtual com port input |
 | [blinky-button](nucleo-f767zi/blinky-button)  | Toggles blinking on and off based on button press (not debounced) |
 | [speedy](nucleo-f767zi/speedy)         | Toggles `PC8` and `PC9` at different speeds  |
+| [blinky-timers-dma](nucleo-f767zi/blinky-timers-dma)         | Toggle LEDs using the hardware timers and DMA  |
