@@ -2,7 +2,8 @@ Notes
 
 - Need to send MSB first
 - Need manual SS control because we want to send 32 bits, using PB8
-- Clock polarity and phase: `CPOL=0` and `CPHA=0` (rising edge), i.e. `mode 0`.
+- Clock polarity and phase: `CPOL=0` and `CPHA=0` (rising edge), i.e. `mode 0`
+- Had to do pin remapping from the default CubeMX SP1 config to make it match the board schematic
 
 Links
 
