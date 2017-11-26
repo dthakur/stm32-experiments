@@ -70,7 +70,7 @@ static void synthesizer_ss_low() {
 
 static void synthesizer_send_register(uint32_t data) {
   synthesizer_ss_low();
-  HAL_SPI_Transmit(&hspi1, (uint8_t *)&data, 4, 5 * 1000);
+  HAL_SPI_Transmit(&hspi1, (uint8_t *)data, 32, 5 * 1000);
   synthesizer_ss_high();
 }
 
@@ -83,11 +83,11 @@ static void synthesizer_set_registers(
   uint32_t r5) {
 
   synthesizer_send_register(r5);
-  synthesizer_send_register(r4);
-  synthesizer_send_register(r3);
-  synthesizer_send_register(r2);
-  synthesizer_send_register(r1);
-  synthesizer_send_register(r0);
+  // synthesizer_send_register(r4);
+  // synthesizer_send_register(r3);
+  // synthesizer_send_register(r2);
+  // synthesizer_send_register(r1);
+  // synthesizer_send_register(r0);
 }
 
 /* USER CODE END PFP */
@@ -145,6 +145,8 @@ int main(void)
       0x00004b3,
       0x0ec803c,
       0x0580005);
+
+    HAL_Delay(1);
   }
   /* USER CODE END 3 */
 
@@ -179,7 +181,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV8;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV256;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
