@@ -5,7 +5,7 @@
   ******************************************************************************
   ** This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
+  * USER CODE END. Other portions of this file, whether
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
@@ -40,7 +40,6 @@
 #include "stm32f7xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -70,7 +69,16 @@ static void synthesizer_ss_low() {
 
 static void synthesizer_send_register(uint32_t data) {
   synthesizer_ss_low();
-  HAL_SPI_Transmit(&hspi1, (uint8_t *)data, 32, 5 * 1000);
+
+  // need to reverse the bytes
+  uint8_t to_send[4];
+  to_send[3] = data & 0x000000ff;
+  to_send[2] = (data & 0x0000ff00) >> 8;
+  to_send[1] = (data & 0x00ff0000) >> 16;
+  to_send[0] = (data & 0xff000000) >> 24;
+
+  HAL_SPI_Transmit(&hspi1, (uint8_t *)to_send, 4, 1000);
+
   synthesizer_ss_high();
 }
 
@@ -83,11 +91,11 @@ static void synthesizer_set_registers(
   uint32_t r5) {
 
   synthesizer_send_register(r5);
-  // synthesizer_send_register(r4);
-  // synthesizer_send_register(r3);
-  // synthesizer_send_register(r2);
-  // synthesizer_send_register(r1);
-  // synthesizer_send_register(r0);
+  synthesizer_send_register(r4);
+  synthesizer_send_register(r3);
+  synthesizer_send_register(r2);
+  synthesizer_send_register(r1);
+  synthesizer_send_register(r0);
 }
 
 /* USER CODE END PFP */
@@ -139,14 +147,14 @@ int main(void)
   /* USER CODE BEGIN 3 */
 
     synthesizer_set_registers(
-      0x0400000,
+      0x0500000,
       0x8008011,
       0x0004e42,
       0x00004b3,
-      0x0ec803c,
+      0x0bc806c,
       0x0580005);
 
-    HAL_Delay(1);
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 
@@ -160,13 +168,13 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
 
-    /**Configure the main internal regulator output voltage 
+    /**Configure the main internal regulator output voltage
     */
   __HAL_RCC_PWR_CLK_ENABLE();
 
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
 
-    /**Initializes the CPU, AHB and APB busses clocks 
+    /**Initializes the CPU, AHB and APB busses clocks
     */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
@@ -176,12 +184,12 @@ void SystemClock_Config(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
-    /**Initializes the CPU, AHB and APB busses clocks 
+    /**Initializes the CPU, AHB and APB busses clocks
     */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV256;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
@@ -190,11 +198,11 @@ void SystemClock_Config(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
-    /**Configure the Systick interrupt time 
+    /**Configure the Systick interrupt time
     */
   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
 
-    /**Configure the Systick 
+    /**Configure the Systick
     */
   HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 
@@ -214,7 +222,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -228,16 +236,15 @@ static void MX_SPI1_Init(void)
 
 }
 
-/** Configure pins as 
-        * Analog 
-        * Input 
+/** Configure pins as
+        * Analog
+        * Input
         * Output
         * EVENT_OUT
         * EXTI
      PC1   ------> ETH_MDC
      PA1   ------> ETH_REF_CLK
      PA2   ------> ETH_MDIO
-     PA7   ------> ETH_CRS_DV
      PC4   ------> ETH_RXD0
      PC5   ------> ETH_RXD1
      PB13   ------> ETH_TXD1
@@ -284,8 +291,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : RMII_REF_CLK_Pin RMII_MDIO_Pin RMII_CRS_DV_Pin */
-  GPIO_InitStruct.Pin = RMII_REF_CLK_Pin|RMII_MDIO_Pin|RMII_CRS_DV_Pin;
+  /*Configure GPIO pins : RMII_REF_CLK_Pin RMII_MDIO_Pin */
+  GPIO_InitStruct.Pin = RMII_REF_CLK_Pin|RMII_MDIO_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -368,7 +375,7 @@ void _Error_Handler(char * file, int line)
   while(1)
   {
   }
-  /* USER CODE END Error_Handler_Debug */ 
+  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef USE_FULL_ASSERT
@@ -393,10 +400,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-*/ 
+*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
