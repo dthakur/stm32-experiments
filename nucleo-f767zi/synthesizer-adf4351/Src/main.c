@@ -70,6 +70,7 @@ static void synthesizer_ss_low() {
 
 static void synthesizer_send_register(uint32_t data) {
   synthesizer_ss_low();
+  HAL_SPI_Transmit(&hspi1, (uint8_t *)&data, 4, 5 * 1000);
   synthesizer_ss_high();
 }
 
@@ -127,14 +128,6 @@ int main(void)
   // default high
   synthesizer_ss_high();
 
-  synthesizer_set_registers(
-    0x0400000,
-    0x8008011,
-    0x0004e42,
-    0x00004b3,
-    0x0ec803c,
-    0x0580005);
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -145,6 +138,13 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 
+    synthesizer_set_registers(
+      0x0400000,
+      0x8008011,
+      0x0004e42,
+      0x00004b3,
+      0x0ec803c,
+      0x0580005);
   }
   /* USER CODE END 3 */
 
@@ -179,7 +179,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV8;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
@@ -208,7 +208,7 @@ static void MX_SPI1_Init(void)
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_MASTER;
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
