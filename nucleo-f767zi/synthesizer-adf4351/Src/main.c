@@ -60,6 +60,35 @@ static void MX_SPI1_Init(void);
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
+static void synthesizer_ss_high() {
+  HAL_GPIO_WritePin(SPI_SS_GPIO_Port, SPI_SS_Pin, GPIO_PIN_SET);
+}
+
+static void synthesizer_ss_low() {
+  HAL_GPIO_WritePin(SPI_SS_GPIO_Port, SPI_SS_Pin, GPIO_PIN_RESET);
+}
+
+static void synthesizer_send_register(uint32_t data) {
+  synthesizer_ss_low();
+  synthesizer_ss_high();
+}
+
+static void synthesizer_set_registers(
+  uint32_t r0,
+  uint32_t r1,
+  uint32_t r2,
+  uint32_t r3,
+  uint32_t r4,
+  uint32_t r5) {
+
+  synthesizer_send_register(r5);
+  synthesizer_send_register(r4);
+  synthesizer_send_register(r3);
+  synthesizer_send_register(r2);
+  synthesizer_send_register(r1);
+  synthesizer_send_register(r0);
+}
+
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -94,6 +123,17 @@ int main(void)
   MX_SPI1_Init();
 
   /* USER CODE BEGIN 2 */
+
+  // default high
+  synthesizer_ss_high();
+
+  synthesizer_set_registers(
+    0x0400000,
+    0x8008011,
+    0x0004e42,
+    0x00004b3,
+    0x0ec803c,
+    0x0580005);
 
   /* USER CODE END 2 */
 
@@ -168,7 +208,7 @@ static void MX_SPI1_Init(void)
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_MASTER;
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
@@ -323,7 +363,7 @@ void _Error_Handler(char * file, int line)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  while(1) 
+  while(1)
   {
   }
   /* USER CODE END Error_Handler_Debug */ 
