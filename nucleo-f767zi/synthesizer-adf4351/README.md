@@ -1,0 +1,3 @@
+- [ADF4351 Datasheet](http://www.analog.com/media/en/technical-documentation/data-sheets/ADF4351.pdf)
+- [Helpful video by OpenLabTech](https://www.youtube.com/channel/UCeF7JKNXOy0jpMOxpgbZcpg)
+- [Helpful code by OpenLabTech](https://github.com/jhol/pyadf435x/blob/master/adf435x/core.py)
