@@ -39,7 +39,7 @@
         "--format",
         "ihex",
         "write",
-        "./build/blinky.hex"
+        "./build/${workspaceFolderBasename}.hex"
       ]
     },
     {
