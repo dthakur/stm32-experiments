@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "name": "cpp launch",
+    "type": "cppdbg",
+    "request": "launch",
+    "program": "${workspaceFolder}/build/blinky.elf",
+    "miDebuggerServerAddress": "localhost:4242",
+    "cwd": "${workspaceFolder}",
+    "MIMode": "gdb",
+    "miDebuggerPath": "/Users/thakur/local/gcc-arm-none-eabi-6-2017-q2-update/bin/arm-none-eabi-gdb",
+  }],
+  "compounds": []
+}

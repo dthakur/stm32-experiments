@@ -4,6 +4,7 @@
 - All projects compiled with `gcc`
 - All projects tested on [nucleo-f767zi](http://www.st.com/en/evaluation-tools/nucleo-f767zi.html)
 - All binaries loaded using [stlink](https://github.com/texane/stlink)
+- Flash using `st-flash --format ihex write <program>.hex`
 
 ### catalog
 

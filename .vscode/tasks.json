@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compile",
+      "type": "shell",
+      "command": "make",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "clean",
+      "command": "make",
+      "type": "shell",
+      "args": [
+        "clean"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "flash",
+      "command": "st-flash",
+      "type": "shell",
+      "group": "build",
+      "dependsOn": "compile",
+      "problemMatcher": [],
+      "args": [
+        "--format",
+        "ihex",
+        "write",
+        "./build/blinky.hex"
+      ]
+    },
+    {
+      "label": "gdb-server",
+      "isBackground": true,
+      "command": "st-util",
+      "problemMatcher": []
+    }
+  ]
+}
