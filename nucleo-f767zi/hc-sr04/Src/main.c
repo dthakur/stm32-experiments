@@ -51,7 +51,7 @@
 #include "usb_device.h"
 
 /* USER CODE BEGIN Includes */
-#include "retarget.h"
+#include "log.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -108,7 +108,6 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  RetargetInit(&huart3);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -131,14 +130,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  printf("starting...\r\n");
-
+  log_info("starting");
   while (1)
   {
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-    printf("looping...\r\n");
   }
   /* USER CODE END 3 */
 
