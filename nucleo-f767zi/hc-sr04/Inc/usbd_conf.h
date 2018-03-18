@@ -1,7 +1,8 @@
 /**
   ******************************************************************************
-  * File Name          : main.h
-  * Description        : This file contains the common defines of the application
+  * @file           : usbd_conf.h
+  * @version        : v1.0_Cube
+  * @brief          : Header for usbd_conf file.
   ******************************************************************************
   * This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
@@ -44,74 +45,135 @@
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+*/
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __MAIN_H
-#define __MAIN_H
-  /* Includes ------------------------------------------------------------------*/
+#ifndef __USBD_CONF__H__
+#define __USBD_CONF__H__
+#ifdef __cplusplus
+ extern "C" {
+#endif
+/* Includes ------------------------------------------------------------------*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "stm32f7xx.h"
+#include "stm32f7xx_hal.h"
 
-/* USER CODE BEGIN Includes */
+/** @addtogroup USBD_OTG_DRIVER
+  * @{
+  */
+  
+/** @defgroup USBD_CONF
+  * @brief usb otg low level driver configuration file
+  * @{
+  */ 
 
-/* USER CODE END Includes */
+/** @defgroup USBD_CONF_Exported_Defines
+  * @{
+  */ 
 
-/* Private define ------------------------------------------------------------*/
+/*---------- -----------*/
+#define USBD_MAX_NUM_INTERFACES     1
+/*---------- -----------*/
+#define USBD_MAX_NUM_CONFIGURATION     1
+/*---------- -----------*/
+#define USBD_MAX_STR_DESC_SIZ     512
+/*---------- -----------*/
+#define USBD_SUPPORT_USER_STRING     0
+/*---------- -----------*/
+#define USBD_DEBUG_LEVEL     0
+/*---------- -----------*/
+#define USBD_LPM_ENABLED     1
+/*---------- -----------*/
+#define USBD_SELF_POWERED     1
 
-#define USER_Btn_Pin GPIO_PIN_13
-#define USER_Btn_GPIO_Port GPIOC
-#define MCO_Pin GPIO_PIN_0
-#define MCO_GPIO_Port GPIOH
-#define RMII_MDC_Pin GPIO_PIN_1
-#define RMII_MDC_GPIO_Port GPIOC
-#define RMII_REF_CLK_Pin GPIO_PIN_1
-#define RMII_REF_CLK_GPIO_Port GPIOA
-#define RMII_MDIO_Pin GPIO_PIN_2
-#define RMII_MDIO_GPIO_Port GPIOA
-#define RMII_CRS_DV_Pin GPIO_PIN_7
-#define RMII_CRS_DV_GPIO_Port GPIOA
-#define RMII_RXD0_Pin GPIO_PIN_4
-#define RMII_RXD0_GPIO_Port GPIOC
-#define RMII_RXD1_Pin GPIO_PIN_5
-#define RMII_RXD1_GPIO_Port GPIOC
-#define RMII_TXD1_Pin GPIO_PIN_13
-#define RMII_TXD1_GPIO_Port GPIOB
-#define LD3_Pin GPIO_PIN_14
-#define LD3_GPIO_Port GPIOB
-#define STLK_RX_Pin GPIO_PIN_8
-#define STLK_RX_GPIO_Port GPIOD
-#define STLK_TX_Pin GPIO_PIN_9
-#define STLK_TX_GPIO_Port GPIOD
-#define USB_PowerSwitchOn_Pin GPIO_PIN_6
-#define USB_PowerSwitchOn_GPIO_Port GPIOG
-#define USB_OverCurrent_Pin GPIO_PIN_7
-#define USB_OverCurrent_GPIO_Port GPIOG
-#define USB_SOF_Pin GPIO_PIN_8
-#define USB_SOF_GPIO_Port GPIOA
-#define USB_VBUS_Pin GPIO_PIN_9
-#define USB_VBUS_GPIO_Port GPIOA
-#define USB_ID_Pin GPIO_PIN_10
-#define USB_ID_GPIO_Port GPIOA
-#define USB_DM_Pin GPIO_PIN_11
-#define USB_DM_GPIO_Port GPIOA
-#define USB_DP_Pin GPIO_PIN_12
-#define USB_DP_GPIO_Port GPIOA
-#define TMS_Pin GPIO_PIN_13
-#define TMS_GPIO_Port GPIOA
-#define TCK_Pin GPIO_PIN_14
-#define TCK_GPIO_Port GPIOA
-#define RMII_TX_EN_Pin GPIO_PIN_11
-#define RMII_TX_EN_GPIO_Port GPIOG
-#define RMII_TXD0_Pin GPIO_PIN_13
-#define RMII_TXD0_GPIO_Port GPIOG
-#define SWO_Pin GPIO_PIN_3
-#define SWO_GPIO_Port GPIOB
+/****************************************/
+/* #define for FS and HS identification */
+#define DEVICE_FS 		0
+#define DEVICE_HS 		1
 
-/* USER CODE BEGIN Private defines */
+/** @defgroup USBD_Exported_Macros
+  * @{
+  */ 
 
-/* USER CODE END Private defines */
+ /* Memory management macros */   
+#define USBD_malloc               malloc
+#define USBD_free                 free
+#define USBD_memset               memset
+#define USBD_memcpy               memcpy
 
-void _Error_Handler(char *, int);
+#define USBD_Delay   HAL_Delay
+    
+ /* DEBUG macros */  
 
-#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
+#if (USBD_DEBUG_LEVEL > 0)
+#define  USBD_UsrLog(...)   printf(__VA_ARGS__);\
+                            printf("\n");
+#else
+#define USBD_UsrLog(...)   
+#endif 
+                            
+                            
+#if (USBD_DEBUG_LEVEL > 1)
+
+#define  USBD_ErrLog(...)   printf("ERROR: ") ;\
+                            printf(__VA_ARGS__);\
+                            printf("\n");
+#else
+#define USBD_ErrLog(...)   
+#endif 
+                            
+                            
+#if (USBD_DEBUG_LEVEL > 2)                         
+#define  USBD_DbgLog(...)   printf("DEBUG : ") ;\
+                            printf(__VA_ARGS__);\
+                            printf("\n");
+#else
+#define USBD_DbgLog(...)                         
+#endif
+                            
+/**
+  * @}
+  */ 
+ 
+    
+    
+/**
+  * @}
+  */ 
+
+/** @defgroup USBD_CONF_Exported_Types
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup USBD_CONF_Exported_Macros
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup USBD_CONF_Exported_Variables
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup USBD_CONF_Exported_FunctionsPrototype
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+#ifdef __cplusplus
+}
+#endif
+
+#endif /*__USBD_CONF__H__*/
 
 /**
   * @}
@@ -119,7 +181,6 @@ void _Error_Handler(char *, int);
 
 /**
   * @}
-*/ 
-
-#endif /* __MAIN_H */
+  */ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
