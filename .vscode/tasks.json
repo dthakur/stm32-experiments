@@ -40,13 +40,16 @@
         "ihex",
         "write",
         "./build/${workspaceFolderBasename}.hex"
-      ]
+      ],
     },
     {
       "label": "gdb-server",
       "isBackground": true,
       "command": "st-util",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "args": [
+        "--semihosting"
+      ]
     }
   ]
 }
