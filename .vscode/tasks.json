@@ -8,10 +8,7 @@
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
       "problemMatcher": [
         "$gcc"
       ]
@@ -32,7 +29,10 @@
       "label": "flash",
       "command": "st-flash",
       "type": "shell",
-      "group": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "dependsOn": "compile",
       "problemMatcher": [],
       "args": [
@@ -40,7 +40,7 @@
         "ihex",
         "write",
         "./build/${workspaceFolderBasename}.hex"
-      ],
+      ]
     },
     {
       "label": "gdb-server",
