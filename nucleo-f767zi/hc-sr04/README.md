@@ -14,4 +14,4 @@ Tricks
 - This gives a timer frequency of `30Hz`
 - Pulse is set to `19200` giving a 10ms pulse on `PD14`
 - Using `TIM4`, `CH1`, `PD12` for input capture, set to falling edge
-- 
+- Output (distance) is printed to USB configured at a virtual serial device

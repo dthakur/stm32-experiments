@@ -22,3 +22,4 @@
 | [speedy](nucleo-f767zi/speedy)         | Toggles `PC8` and `PC9` at different speeds  |
 | [blinky-timers-dma](nucleo-f767zi/blinky-timers-dma)         | Toggle LEDs using the hardware timers and DMA  |
 | [synthesizer-adf4351](nucleo-f767zi/synthesizer-adf4351) | Interface with `ADF4351` over SPI |
+| [hc-sr04](nucleo-f767zi/hc-sr04) | Making distance measurements using `HC-SR04` ultrasonic sensor |
