@@ -3,8 +3,10 @@
 - All projects created with `STM32CubeMX`
 - All projects compiled with `gcc`
 - All projects tested on [nucleo-f767zi](http://www.st.com/en/evaluation-tools/nucleo-f767zi.html)
-- [Board user manual](http://www.st.com/content/ccc/resource/technical/document/user_manual/group0/26/49/90/2e/33/0d/4a/da/DM00244518/files/DM00244518.pdf/jcr:content/translations/en.DM00244518.pdf)
-- [Board schematic](nucleo-f767zi-schematic.pdf)
+- [Board user manual for nucleo-f767zi](http://www.st.com/content/ccc/resource/technical/document/user_manual/group0/26/49/90/2e/33/0d/4a/da/DM00244518/files/DM00244518.pdf/jcr:content/translations/en.DM00244518.pdf)
+- [Board schematic for nucleo-f767zi](nucleo-f767zi-schematic.pdf)
+- [STM32F767ZIT6 reference manual](http://www.st.com/content/ccc/resource/technical/document/reference_manual/group0/96/8b/0d/ec/16/22/43/71/DM00224583/files/DM00224583.pdf/jcr:content/translations/en.DM00224583.pdf)
+- [STM32F767ZIT6 programming manual](http://www.st.com/content/ccc/resource/technical/document/programming_manual/group0/78/47/33/dd/30/37/4c/66/DM00237416/files/DM00237416.pdf/jcr:content/translations/en.DM00237416.pdf)
 - All binaries loaded using [stlink](https://github.com/texane/stlink)
 - Flash using `st-flash --format ihex write <program>.hex`
 
