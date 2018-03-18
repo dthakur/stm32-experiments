@@ -67,6 +67,7 @@ uint16_t sensorValues[2];
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM4_Init(void);
+static void MX_NVIC_Init(void);
                                     
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                 
@@ -77,21 +78,28 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
+uint32_t previous = 0;
 /* called just by naming convention */
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
   if (htim->Channel != HAL_TIM_ACTIVE_CHANNEL_1) {
     return;
   }
 
-  // uint32_t diff = 0;
-  // if (sensorValues[1] >=sensorValuescaptures[0]) {
-  //   diff = captures[1] - captures[0];
-  // } else {
-  //   diff = (htim4.Instance->ARR - captures[0]) + captures[1];
-  // }
+  uint32_t current = __HAL_TIM_GET_COUNTER(htim);
 
-  // float frequency = HAL_RCC_GetHCLKFreq() / (htim2.Instance->PSC + 1);
-  // frequency = (float) frequency / diff;
+  if (current <= previous) {
+    previous = current;
+    return;
+  }
+
+  uint32_t diff = current - previous;
+  uint32_t hclk = HAL_RCC_GetHCLKFreq(); // 96MHz
+  float frequency = hclk / (htim->Instance->PSC + 1); // PSC at 49 // so frequency = 1,920,0000
+  float period = diff * 1000 / frequency;
+  float distance = period * 340 / 2 / 1000;
+  log_info("previous=%u current=%u period=%.2fms distance=%.2fm", previous, current, period, distance);
+
+  previous = current;
 }
 /* USER CODE END 0 */
 
@@ -122,6 +130,9 @@ int main(void)
   MX_TIM4_Init();
   MX_USB_DEVICE_Init();
 
+  /* Initialize interrupts */
+  MX_NVIC_Init();
+
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
@@ -130,7 +141,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  log_info("starting");
   while (1)
   {
   /* USER CODE END WHILE */
@@ -209,6 +219,18 @@ void SystemClock_Config(void)
 
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+}
+
+/** NVIC Configuration
+*/
+static void MX_NVIC_Init(void)
+{
+  /* TIM4_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM4_IRQn);
+  /* OTG_FS_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
 }
 
 /* TIM4 init function */
