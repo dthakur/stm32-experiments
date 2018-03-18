@@ -54,7 +54,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+uint16_t sensorValues[2];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,7 +74,22 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
+/* called just by naming convention */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
+  if (htim->Channel != HAL_TIM_ACTIVE_CHANNEL_1) {
+    return;
+  }
 
+  // uint32_t diff = 0;
+  // if (sensorValues[1] >=sensorValuescaptures[0]) {
+  //   diff = captures[1] - captures[0];
+  // } else {
+  //   diff = (htim4.Instance->ARR - captures[0]) + captures[1];
+  // }
+
+  // float frequency = HAL_RCC_GetHCLKFreq() / (htim2.Instance->PSC + 1);
+  // frequency = (float) frequency / diff;
+}
 /* USER CODE END 0 */
 
 int main(void)
@@ -110,6 +125,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
+  HAL_TIM_IC_Start_DMA(&htim4, TIM_CHANNEL_1, (uint32_t *) &sensorValues, 2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -119,8 +135,6 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-  printf("hello!");
-  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 

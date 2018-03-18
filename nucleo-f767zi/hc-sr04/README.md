@@ -13,5 +13,5 @@ Tricks
 - `Period` at `64000-1`
 - This gives a timer frequency of `30Hz`
 - Pulse is set to `19200` giving a 10ms pulse on `PD14`
-- Using `TIM4`, `CH1` for input capture, set to falling edge
+- Using `TIM4`, `CH1`, `PD12` for input capture, set to falling edge
 - 
