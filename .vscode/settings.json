@@ -1,6 +1,8 @@
 {
   "files.associations": {
     "stm32f7xx_hal.h": "c",
-    "main.h": "c"
+    "main.h": "c",
+    "stm32f7xx_hal_conf.h": "c",
+    "usb_device.h": "c"
   }
 }
