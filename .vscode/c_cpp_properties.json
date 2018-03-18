@@ -6,7 +6,9 @@
                 "${workspaceRoot}",
                 "${workspaceRoot}/Inc",
                 "${workspaceRoot}/Drivers/STM32F7xx_HAL_Driver/Inc",
-                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32F7xx/Include"
+                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32F7xx/Include",
+                "${workspaceRoot}/Drivers/CMSIS/Include",
+                "${workspaceRoot}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
             ],
             "defines": [
                 "STM32F767xx"
@@ -19,8 +21,7 @@
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
             },
-            "macFrameworkPath": [
-            ]
+            "macFrameworkPath": []
         },
         {
             "name": "Linux",
