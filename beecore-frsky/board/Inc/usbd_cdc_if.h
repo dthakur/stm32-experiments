@@ -1,8 +1,7 @@
 /**
   ******************************************************************************
-  * File Name          : stm32f3xx_hal_msp.c
-  * Description        : This file provides code for the MSP Initialization 
-  *                      and de-Initialization codes.
+  * @file           : usbd_cdc_if.h
+  * @brief          : Header for usbd_cdc_if file.
   ******************************************************************************
   * This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
@@ -45,58 +44,94 @@
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+*/
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __USBD_CDC_IF_H
+#define __USBD_CDC_IF_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx_hal.h"
+#include "usbd_cdc.h"
+/* USER CODE BEGIN INCLUDE */
+/* USER CODE END INCLUDE */
 
-extern void _Error_Handler(char *, int);
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-/**
-  * Initializes the Global MSP.
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
+  * @{
   */
-void HAL_MspInit(void)
-{
-  /* USER CODE BEGIN MspInit 0 */
+  
+/** @defgroup USBD_CDC_IF
+  * @brief header 
+  * @{
+  */ 
 
-  /* USER CODE END MspInit 0 */
+/** @defgroup USBD_CDC_IF_Exported_Defines
+  * @{
+  */ 
+/* USER CODE BEGIN EXPORTED_DEFINES */
+/* USER CODE END EXPORTED_DEFINES */
 
-  __HAL_RCC_SYSCFG_CLK_ENABLE();
+/**
+  * @}
+  */ 
 
-  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+/** @defgroup USBD_CDC_IF_Exported_Types
+  * @{
+  */  
+/* USER CODE BEGIN EXPORTED_TYPES */
+/* USER CODE END EXPORTED_TYPES */
 
-  /* System interrupt init*/
-  /* MemoryManagement_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(MemoryManagement_IRQn, 0, 0);
-  /* BusFault_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(BusFault_IRQn, 0, 0);
-  /* UsageFault_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(UsageFault_IRQn, 0, 0);
-  /* SVCall_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(SVCall_IRQn, 0, 0);
-  /* DebugMonitor_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DebugMonitor_IRQn, 0, 0);
-  /* PendSV_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(PendSV_IRQn, 0, 0);
-  /* SysTick_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+/**
+  * @}
+  */ 
 
-  /* USER CODE BEGIN MspInit 1 */
+/** @defgroup USBD_CDC_IF_Exported_Macros
+  * @{
+  */ 
+/* USER CODE BEGIN EXPORTED_MACRO */
+/* USER CODE END EXPORTED_MACRO */
 
-  /* USER CODE END MspInit 1 */
+/**
+  * @}
+  */ 
+
+/** @defgroup USBD_AUDIO_IF_Exported_Variables
+  * @{
+  */ 
+extern USBD_CDC_ItfTypeDef  USBD_Interface_fops_FS;
+
+/* USER CODE BEGIN EXPORTED_VARIABLES */
+/* USER CODE END EXPORTED_VARIABLES */
+
+/**
+  * @}
+  */ 
+
+/** @defgroup USBD_CDC_IF_Exported_FunctionsPrototype
+  * @{
+  */ 
+uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
+
+/* USER CODE BEGIN EXPORTED_FUNCTIONS */
+/* USER CODE END EXPORTED_FUNCTIONS */
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+  
+#ifdef __cplusplus
 }
-
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
+#endif
+  
+#endif /* __USBD_CDC_IF_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
