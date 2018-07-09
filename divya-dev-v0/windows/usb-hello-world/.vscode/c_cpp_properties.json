@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Inc",
+                "${workspaceFolder}/Drivers/CMSIS/Include",
+                "${workspaceFolder}/Drivers/STM32F0xx_HAL_Driver/Inc",
+                "C:/Program Files (x86)/GNU Tools Arm Embedded/7 2018-q2-update/arm-none-eabi/include",
+                "C:/Program Files (x86)/GNU Tools Arm Embedded/7 2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include",
+                "C:/Program Files (x86)/GNU Tools Arm Embedded/7 2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include-fixed"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "STM32F042x6",
+                "USE_HAL_DRIVER"
+            ],
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

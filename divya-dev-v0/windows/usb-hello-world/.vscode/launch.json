@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stutil",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/usb-hello-world.elf",
+            "name": "Debug (ST-Util)"
+        }
+    ]
+}
