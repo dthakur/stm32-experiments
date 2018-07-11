@@ -39,16 +39,31 @@ typedef union sbusFrame_u {
 typedef struct sbusHandle_s {
   sbusFrame_t frame;
   uint32_t bytesReceived;
+  uint16_t position;
   void (*onByte)(struct sbusHandle_s *handle, uint8_t byte);
   void (*onFrame)(struct sbusHandle_s *handle);
 } sbusHandle_t;
 
 void _onByte(sbusHandle_t *handle, uint8_t byte) {
   handle->bytesReceived++;
-  //handle->onFrame(handle);
+
+  if (handle->position == 0 && byte != SBUS_FRAME_BEGIN_BYTE) {
+    return;
+  }
+
+  handle->frame.bytes[handle->position++] = byte;
+
+  if (handle->position != SBUS_FRAME_SIZE - 1) {
+    return;
+  }
+
+  handle->position = 0;
+  handle->onFrame(handle);
 }
 
 uint8_t sbusInit(sbusHandle_t *handle) {
   handle->onByte = &_onByte;
+  handle->position = 0;
+
   return 1;
 }

@@ -63,7 +63,6 @@ DMA_HandleTypeDef hdma_usart1_rx;
 /* USER CODE BEGIN PV */
 uint8_t sbusByte;
 sbusHandle_t sbusHandle;
-char message[35];
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE END PV */
 
@@ -72,12 +71,11 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
-static void appSbusInit(void);
-static void onSbusFrame(sbusHandle_t *handle);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-
+static void appSbusInit(void);
+static void onSbusFrame(sbusHandle_t *handle);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -125,9 +123,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    itoa(sbusHandle.bytesReceived, message, 10);
-    message[strlen(message)] = '\n';
-    CDC_Transmit_FS(message, strlen(message));
     HAL_Delay(1000);
   /* USER CODE END WHILE */
 
@@ -261,8 +256,7 @@ static void appSbusInit(void) {
 }
 
 static void onSbusFrame(sbusHandle_t *handle) {
-  const char *gotFrame = "got frame!\n";
-  CDC_Transmit_FS(gotFrame, strlen(gotFrame));
+  CDC_Transmit_FS(handle->frame.bytes, SBUS_FRAME_SIZE);
 }
 /* USER CODE END 4 */
 
