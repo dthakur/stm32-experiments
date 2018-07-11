@@ -11,7 +11,7 @@
                 "echo": true,
                 "reveal": "always",
                 "focus": false,
-                "panel": "shared"
+                "panel": "new"
             },
             "group": {
                 "kind": "build",
@@ -35,6 +35,20 @@
             "problemMatcher": [
                 "$gcc"
             ]
+        },
+        {
+            "label": "flash",
+            "type": "shell",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "new"
+            },
+            "dependsOn": "make",
+            "command": "st-flash --reset --format ihex write build/*.hex",
+            "problemMatcher": []
         }
     ]
 }
