@@ -52,7 +52,8 @@
 #include "usb_device.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "usbd_cdc_if.h"
+#include "sbus.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -60,8 +61,10 @@ UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_rx;
 
 /* USER CODE BEGIN PV */
+uint8_t sbusByte;
+sbusHandle_t sbusHandle;
+char message[35];
 /* Private variables ---------------------------------------------------------*/
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,6 +72,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_USART1_UART_Init(void);
+static void appSbusInit(void);
+static void onSbusFrame(sbusHandle_t *handle);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -113,13 +118,17 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  appSbusInit();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+    itoa(sbusHandle.bytesReceived, message, 10);
+    message[strlen(message)] = '\n';
+    CDC_Transmit_FS(message, strlen(message));
+    HAL_Delay(1000);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -237,7 +246,24 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+  sbusHandle.onByte(&sbusHandle, sbusByte);
+}
 
+static void appSbusInit(void) {
+  sbusHandle.onFrame = onSbusFrame;
+
+  if (!sbusInit(&sbusHandle)) {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  HAL_UART_Receive_DMA(&huart1, &sbusByte, 1);
+}
+
+static void onSbusFrame(sbusHandle_t *handle) {
+  const char *gotFrame = "got frame!\n";
+  CDC_Transmit_FS(gotFrame, strlen(gotFrame));
+}
 /* USER CODE END 4 */
 
 /**
