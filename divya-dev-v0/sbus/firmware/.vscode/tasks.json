@@ -49,6 +49,6 @@
             "dependsOn": "make",
             "command": "st-flash --reset --format ihex write build/*.hex",
             "problemMatcher": []
-        }
+        }   
     ]
 }

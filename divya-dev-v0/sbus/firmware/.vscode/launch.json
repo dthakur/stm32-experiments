@@ -1,0 +1,30 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "gdb",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/build/sbus.elf",
+      "miDebuggerServerAddress": "localhost:4242",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": true,
+      "linux": {
+        "MIMode": "gdb"
+      },
+      "osx": {
+        "MIMode": "gdb",
+        "miDebuggerPath": "/Users/thakur/local/gcc-arm-none-eabi-7-2018-q2-update/bin/arm-none-eabi-gdb"
+      },
+      "windows": {
+        "MIMode": "gdb"
+      }
+    }
+  ]
+}
