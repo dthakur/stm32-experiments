@@ -1,10 +1,22 @@
 /**
   ******************************************************************************
-  * @file    stm32f0xx_it.h
-  * @brief   This file contains the headers of the interrupt handlers.
+  * @file    stm32f0xx_hal_msp_template.c
+  * @author  MCD Application Team
+  * @brief   HAL MSP module.
+  *          This file template is located in the HAL folder and should be copied 
+  *          to the user folder.
+  *         
+  @verbatim
+ ===============================================================================
+                     ##### How to use this driver #####
+ ===============================================================================
+    [..]
+
+  @endverbatim
   ******************************************************************************
+  * @attention
   *
-  * COPYRIGHT(c) 2018 STMicroelectronics
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -29,36 +41,77 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
-
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F0xx_IT_H
-#define __STM32F0xx_IT_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif 
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx_hal.h"
-#include "main.h"
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
 
-void NMI_Handler(void);
-void HardFault_Handler(void);
-void SVC_Handler(void);
-void PendSV_Handler(void);
-void SysTick_Handler(void);
-void DMA1_Channel2_3_IRQHandler(void);
-void USB_IRQHandler(void);
+/** @addtogroup STM32F0xx_HAL_Driver
+  * @{
+  */
 
-#ifdef __cplusplus
+/** @defgroup HAL_MSP HAL MSP module driver
+  * @brief HAL MSP module.
+  * @{
+  */
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
+/* Private functions ---------------------------------------------------------*/
+
+/** @defgroup HAL_MSP_Private_Functions HAL MSP Private Functions
+  * @{
+  */
+
+/**
+  * @brief  Initializes the Global MSP.
+  * @retval None
+  */
+void HAL_MspInit(void)
+{
+
 }
-#endif
 
-#endif /* __STM32F0xx_IT_H */
+/**
+  * @brief  DeInitializes the Global MSP. 
+  * @retval None
+  */
+void HAL_MspDeInit(void)
+{
+
+}
+
+/**
+  * @brief  Initializes the PPP MSP.
+  * @retval None
+  */
+void HAL_PPP_MspInit(void)
+{
+
+}
+
+/**
+  * @brief  DeInitializes the PPP MSP. 
+  * @retval None
+  */
+void HAL_PPP_MspDeInit(void)
+{
+
+}
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
