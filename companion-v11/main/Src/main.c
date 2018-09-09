@@ -81,23 +81,12 @@ static void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
+static void appSmartportInit(void);
 static void onSmartportFrame(smartportHandle_t *handle);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-static void appSmartportInit() {
-  smartportHandle.onFrame = onSmartportFrame;
 
-  if (!smartportInit(&smartportHandle)) {
-    _Error_Handler(__FILE__, __LINE__);
-  }
-
-  HAL_UART_Receive_DMA(&huart1, &smartportByte, 1);
-}
-
-static void onSmartportFrame(smartportHandle_t *handle) {
-  CDC_Transmit_FS(handle->frame.bytes, SMARTPORT_FRAME_SIZE);
-}
 /* USER CODE END 0 */
 
 /**
@@ -358,7 +347,19 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+static void appSmartportInit(void) {
+  smartportHandle.onFrame = onSmartportFrame;
 
+  if (!smartportInit(&smartportHandle)) {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  HAL_UART_Receive_DMA(&huart1, &smartportByte, 1);
+}
+
+static void onSmartportFrame(smartportHandle_t *handle) {
+  CDC_Transmit_FS(&handle->frame, SMARTPORT_FRAME_SIZE);
+}
 /* USER CODE END 4 */
 
 /**
