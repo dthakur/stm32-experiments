@@ -59,16 +59,10 @@
 
 /* Private define ------------------------------------------------------------*/
 
-#define VBAT_SCALED_IN_Pin GPIO_PIN_4
-#define VBAT_SCALED_IN_GPIO_Port GPIOA
-#define AUDIO_OUT_Pin GPIO_PIN_6
-#define AUDIO_OUT_GPIO_Port GPIOA
-#define VID_SELECT_Pin GPIO_PIN_1
-#define VID_SELECT_GPIO_Port GPIOB
-#define FC_TX_Pin GPIO_PIN_6
-#define FC_TX_GPIO_Port GPIOB
-#define FC_RX_Pin GPIO_PIN_7
-#define FC_RX_GPIO_Port GPIOB
+#define SBUS_TX_Pin GPIO_PIN_6
+#define SBUS_TX_GPIO_Port GPIOB
+#define SBUS_RX_Pin GPIO_PIN_7
+#define SBUS_RX_GPIO_Port GPIOB
 
 /* ########################## Assert Selection ############################## */
 /**

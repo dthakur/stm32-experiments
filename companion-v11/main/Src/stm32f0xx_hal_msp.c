@@ -48,7 +48,6 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx_hal.h"
-
 extern DMA_HandleTypeDef hdma_usart1_rx;
 
 extern void _Error_Handler(char *, int);
@@ -78,56 +77,6 @@ void HAL_MspInit(void)
   /* USER CODE BEGIN MspInit 1 */
 
   /* USER CODE END MspInit 1 */
-}
-
-void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
-{
-
-  GPIO_InitTypeDef GPIO_InitStruct;
-  if(hadc->Instance==ADC1)
-  {
-  /* USER CODE BEGIN ADC1_MspInit 0 */
-
-  /* USER CODE END ADC1_MspInit 0 */
-    /* Peripheral clock enable */
-    __HAL_RCC_ADC1_CLK_ENABLE();
-  
-    /**ADC GPIO Configuration    
-    PA4     ------> ADC_IN4 
-    */
-    GPIO_InitStruct.Pin = VBAT_SCALED_IN_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(VBAT_SCALED_IN_GPIO_Port, &GPIO_InitStruct);
-
-  /* USER CODE BEGIN ADC1_MspInit 1 */
-
-  /* USER CODE END ADC1_MspInit 1 */
-  }
-
-}
-
-void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
-{
-
-  if(hadc->Instance==ADC1)
-  {
-  /* USER CODE BEGIN ADC1_MspDeInit 0 */
-
-  /* USER CODE END ADC1_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_ADC1_CLK_DISABLE();
-  
-    /**ADC GPIO Configuration    
-    PA4     ------> ADC_IN4 
-    */
-    HAL_GPIO_DeInit(VBAT_SCALED_IN_GPIO_Port, VBAT_SCALED_IN_Pin);
-
-  /* USER CODE BEGIN ADC1_MspDeInit 1 */
-
-  /* USER CODE END ADC1_MspDeInit 1 */
-  }
-
 }
 
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
@@ -180,7 +129,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     PB6     ------> USART1_TX
     PB7     ------> USART1_RX 
     */
-    GPIO_InitStruct.Pin = FC_TX_Pin|FC_RX_Pin;
+    GPIO_InitStruct.Pin = SBUS_TX_Pin|SBUS_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -226,7 +175,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
     PB6     ------> USART1_TX
     PB7     ------> USART1_RX 
     */
-    HAL_GPIO_DeInit(GPIOB, FC_TX_Pin|FC_RX_Pin);
+    HAL_GPIO_DeInit(GPIOB, SBUS_TX_Pin|SBUS_RX_Pin);
 
     /* USART1 DMA DeInit */
     HAL_DMA_DeInit(huart->hdmarx);
