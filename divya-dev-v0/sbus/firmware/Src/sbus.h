@@ -40,12 +40,17 @@ typedef struct sbusHandle_s {
   sbusFrame_t frame;
   uint32_t bytesReceived;
   uint16_t position;
+  uint8_t lastByte;
   void (*onByte)(struct sbusHandle_s *handle, uint8_t byte);
   void (*onFrame)(struct sbusHandle_s *handle);
+  void (*transmit)(struct sbusHandle_s *handle, uint8_t *byte);
 } sbusHandle_t;
 
 void _onByte(sbusHandle_t *handle, uint8_t byte) {
   handle->bytesReceived++;
+  handle->lastByte = byte;
+
+  handle->transmit(handle, &handle->lastByte);
 
   if (handle->position == 0 && byte != SBUS_FRAME_BEGIN_BYTE) {
     return;

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * @file           : usbd_desc.h
-  * @version        : v2.0_Cube
-  * @brief          : Header for usbd_conf.c file.
+  * @file           : usb_device.c
+  * @version        : v1.0_Cube
+  * @brief          : This file implements the USB Device
   ******************************************************************************
   * This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
@@ -46,110 +46,76 @@
   *
   ******************************************************************************
   */
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBD_DESC__H__
-#define __USBD_DESC__H__
-
-#ifdef __cplusplus
- extern "C" {
-#endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_def.h"
 
-/* USER CODE BEGIN INCLUDE */
+#include "usb_device.h"
+#include "usbd_core.h"
+#include "usbd_desc.h"
+#include "usbd_cdc.h"
+#include "usbd_cdc_if.h"
 
-/* USER CODE END INCLUDE */
+/* USER CODE BEGIN Includes */
 
-/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
-  * @{
-  */
+/* USER CODE END Includes */
 
-/** @defgroup USBD_DESC USBD_DESC
-  * @brief Usb device descriptors module.
-  * @{
-  */
+/* USER CODE BEGIN PV */
+/* Private variables ---------------------------------------------------------*/
 
-/** @defgroup USBD_DESC_Exported_Defines USBD_DESC_Exported_Defines
-  * @brief Defines.
-  * @{
-  */
+/* USER CODE END PV */
 
-/* USER CODE BEGIN EXPORTED_DEFINES */
+/* USER CODE BEGIN PFP */
+/* Private function prototypes -----------------------------------------------*/
 
-/* USER CODE END EXPORTED_DEFINES */
+/* USER CODE END PFP */
 
-/**
-  * @}
-  */
+/* USB Device Core handle declaration. */
+USBD_HandleTypeDef hUsbDeviceFS;
 
-/** @defgroup USBD_DESC_Exported_TypesDefinitions USBD_DESC_Exported_TypesDefinitions
-  * @brief Types.
-  * @{
-  */
+/*
+ * -- Insert your variables declaration here --
+ */
+/* USER CODE BEGIN 0 */
 
-/* USER CODE BEGIN EXPORTED_TYPES */
+/* USER CODE END 0 */
 
-/* USER CODE END EXPORTED_TYPES */
+/*
+ * -- Insert your external function declaration here --
+ */
+/* USER CODE BEGIN 1 */
 
-/**
-  * @}
-  */
-
-/** @defgroup USBD_DESC_Exported_Macros USBD_DESC_Exported_Macros
-  * @brief Aliases.
-  * @{
-  */
-
-/* USER CODE BEGIN EXPORTED_MACRO */
-
-/* USER CODE END EXPORTED_MACRO */
+/* USER CODE END 1 */
 
 /**
-  * @}
+  * Init USB device Library, add supported class and start the library
+  * @retval None
   */
+void MX_USB_DEVICE_Init(void)
+{
+  /* USER CODE BEGIN USB_DEVICE_Init_PreTreatment */
+  
+  /* USER CODE END USB_DEVICE_Init_PreTreatment */
+  
+  /* Init Device Library, add supported class and start the library. */
+  USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS);
 
-/** @defgroup USBD_DESC_Exported_Variables USBD_DESC_Exported_Variables
-  * @brief Public variables.
-  * @{
-  */
+  USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
 
-/** Descriptor for the Usb device. */
-extern USBD_DescriptorsTypeDef FS_Desc;
+  USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
 
-/* USER CODE BEGIN EXPORTED_VARIABLES */
+  USBD_Start(&hUsbDeviceFS);
 
-/* USER CODE END EXPORTED_VARIABLES */
-
-/**
-  * @}
-  */
-
-/** @defgroup USBD_DESC_Exported_FunctionsPrototype USBD_DESC_Exported_FunctionsPrototype
-  * @brief Public functions declaration.
-  * @{
-  */
-
-/* USER CODE BEGIN EXPORTED_FUNCTIONS */
-
-/* USER CODE END EXPORTED_FUNCTIONS */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-#ifdef __cplusplus
+  /* USER CODE BEGIN USB_DEVICE_Init_PostTreatment */
+  
+  /* USER CODE END USB_DEVICE_Init_PostTreatment */
 }
-#endif
 
-#endif /* __USBD_DESC__H__ */
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

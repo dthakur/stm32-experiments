@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file           : usbd_desc.h
-  * @version        : v2.0_Cube
+  * @version        : v1.0_Cube
   * @brief          : Header for usbd_conf.c file.
   ******************************************************************************
   * This notice applies to any and all portions of this file

@@ -119,7 +119,7 @@ int main(void)
   /* USER CODE BEGIN 3 */
     CDC_Transmit_FS("Hello, World!\r\n", 15);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-    HAL_Delay(1000);
+    HAL_Delay(2000);
 
   }
   /* USER CODE END 3 */

@@ -59,6 +59,11 @@
 
 /* Private define ------------------------------------------------------------*/
 
+#define SBUS_TX_Pin GPIO_PIN_9
+#define SBUS_TX_GPIO_Port GPIOA
+#define SBUS_RX_Pin GPIO_PIN_10
+#define SBUS_RX_GPIO_Port GPIOA
+
 /* ########################## Assert Selection ############################## */
 /**
   * @brief Uncomment the line below to expanse the "assert_param" macro in the 
